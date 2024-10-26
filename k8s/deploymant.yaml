@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: candidate-onboarding-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: candidate-onboarding-app
+  template:
+    metadata:
+      labels:
+        app: candidate-onboarding-app
+    spec:
+      containers:
+      - name: candidate-onboarding-app
+        image: ashrujitpal/candidateonboardingapp:v1
+        ports:
+        - containerPort: 5000
