@@ -6,4 +6,4 @@ psycopg2-binary
 pgvector
 pypdf
 sentence-transformers
-torch
+torch >=1.6.6
