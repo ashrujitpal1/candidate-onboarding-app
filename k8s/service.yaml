@@ -7,5 +7,5 @@ spec:
   selector:
     app: candidate-onboarding-app
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
