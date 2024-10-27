@@ -1,27 +1,28 @@
-# Use an official Python runtime as the base image
-FROM python:3.9-slim
+# Builder stage
+FROM python:3.9-slim as builder
 
-# Maintainer
-LABEL maintainer="ashrujit.pal@infosys.com"
-
-# Set the working directory in the container
 WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the required packages
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
 
-# Make port 5000 available to the world outside this container
-EXPOSE 8080
+RUN pip install --user --no-cache-dir -r requirements.txt
 
-# Define Entrypoint
-ENTRYPOINT ["python"]
+# Final stage
+FROM python:3.9-slim
 
-# Define CMD
-CMD ["src/app.py"]
+WORKDIR /app
+
+# Copy installed packages from builder stage
+COPY --from=builder /root/.local /root/.local
+
+# Make sure scripts in .local are usable:
+ENV PATH=/root/.local/bin:$PATH
+
+# Copy all files from the src directory
+COPY src/ .
+
+CMD ["python", "app.py"]
