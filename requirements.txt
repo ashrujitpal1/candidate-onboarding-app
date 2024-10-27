@@ -6,4 +6,4 @@ psycopg2-binary==2.9.6
 pgvector==0.1.8
 pypdf==3.8.1
 sentence-transformers==2.2.2; python_full_version >= '3.6.0'
-#torch
+torch==2.0.1+cu118
