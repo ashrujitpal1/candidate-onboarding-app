@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.10-alpine
+FROM python:3.9-alpine
 
 # Maintainer
 LABEL maintainer="ashrujit.pal@infosys.com"
