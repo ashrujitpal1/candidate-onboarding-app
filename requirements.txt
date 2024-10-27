@@ -1,9 +1,9 @@
-flask==2.3.2
-werkzeug==2.3.6
+Flask==2.2.5
+Werkzeug==2.2.3
 langchain==0.0.228
 python-dotenv==1.0.0
 psycopg2-binary==2.9.6
 pgvector==0.1.8
-pypdf==3.12.1
+pypdf==3.8.1
 sentence-transformers==2.2.2
-torch==2.0.1
+torch==1.13.1
