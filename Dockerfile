@@ -1,5 +1,5 @@
 # Builder stage
-FROM library/python:3.9-stretch as builder
+FROM python:3.9 as builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY requirements.txt .
 RUN pip install --user --no-cache-dir -r requirements.txt
 
 # Final stage
-FROM library/python:3.9-stretch
+FROM python:3.9
 
 WORKDIR /app
 
@@ -25,4 +25,9 @@ ENV PATH=/root/.local/bin:$PATH
 # Copy all files from the src directory
 COPY src/ .
 
-CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+EXPOSE 8080
+
+CMD ["flask", "run"]
