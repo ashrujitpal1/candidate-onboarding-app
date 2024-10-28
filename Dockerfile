@@ -1,5 +1,5 @@
 # Builder stage
-FROM python:3.9.2 as builder
+FROM library/python:3.9-stretch as builder
 
 WORKDIR /app
 
@@ -9,10 +9,10 @@ RUN apt-get update && apt-get install -y \
 
 COPY requirements.txt .
 
-RUN pip3 install --user --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir -r requirements.txt
 
 # Final stage
-FROM python:3.9.2
+FROM library/python:3.9-stretch
 
 WORKDIR /app
 
@@ -25,4 +25,4 @@ ENV PATH=/root/.local/bin:$PATH
 # Copy all files from the src directory
 COPY src/ .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
+CMD [ "python", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8080"]
